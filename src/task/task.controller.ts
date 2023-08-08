@@ -16,7 +16,7 @@ export class TaskController {
     }
 
     @Get(':id')
-    getById(@Param('id', ParseIntPipe) taskId: number){
+    getById(@Param('id') taskId: string){
         const task = this.taskService.getTaskById(taskId);
         if(!task){
             throw new NotFoundException(`Task with id ${taskId} not found.`);
@@ -30,13 +30,15 @@ export class TaskController {
     }
 
     @Put(':id')
-    updateTask(@Param('id', ParseIntPipe) taskId: number, @Body() updatedTask: UpdateTaskDto){
+    updateTask(@Param('id') taskId: string, @Body() updatedTask: UpdateTaskDto){
         const task = this.taskService.updateTaskById(taskId, updatedTask);
         return task;
     }
 
-    @Delete()
-    deleteTask(){
+    @Delete(':id')
+    deleteTask(@Param('id') taskId: string){
+        const task = this.taskService.deleteTaskById(taskId);
+        return task;
 
     }
 }

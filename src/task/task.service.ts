@@ -1,13 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTaskDto } from './dtos/CreateTask.dto';
 import { UpdateTaskDto } from './dtos/UpdateTask.dto';
+import { v4 as uuidv4 } from 'uuid'; // Import the v4 function from uuid
 
 @Injectable()
 export class TaskService {
 
-    private idNum = 1;
     taskList = [
-        {id: 1, title: 'read a book', description: 'reach at least one hour each day', completed: false},
+        {id: '1', title: 'read a book', description: 'reach at least one hour each day', completed: false},
         
     ];
 
@@ -16,25 +16,25 @@ export class TaskService {
     }
 
     createTask(taskDetails: CreateTaskDto){
-        const newTask = {id: this.idNum,
+        const newTask = {
+            id: uuidv4(),
             title: taskDetails.title,
             description: taskDetails.description,
             completed:false
         };
 
         this.taskList.push(newTask);
-        this.idNum++;
         console.log(this.taskList);
 
         return newTask;
     }
 
-    getTaskById(id: number){
+    getTaskById(id: string){
         const task = this.taskList.find(task => task.id === id);
         return task;
     }
 
-    updateTaskById(id: number, updatedTask: UpdateTaskDto){
+    updateTaskById(id: string, updatedTask: UpdateTaskDto){
         const taskIndex = this.taskList.findIndex(task => task.id === id);
 
         if(taskIndex === -1){
@@ -50,7 +50,7 @@ export class TaskService {
         return this.taskList;
     }
 
-    deleteTaskById(id: number){
+    deleteTaskById(id: string){
         const taskIndex = this.taskList.findIndex(task => task.id === id);
 
         if (taskIndex === -1) {
