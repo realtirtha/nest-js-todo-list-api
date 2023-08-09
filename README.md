@@ -88,4 +88,3 @@ API documentation is generated using Swagger. Access the Swagger UI at [http://l
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).
-```
