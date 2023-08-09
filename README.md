@@ -24,7 +24,7 @@ Follow these steps to get the project up and running:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/realtirtha/nest-js-todo-list-api.git
+   git clone https://github.com/tirthacodes/nest-js-todo-list-api.git
    ```
 
 2. Navigate to the project directory:
